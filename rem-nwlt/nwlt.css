@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f6f6f6;
+  font-family: 'Source Sans Pro', sans-serif;
+
+}
+
+h1 {
+  color: #333;
+  /* font-family: 'Sarina', cursive; */
+}
+
+p {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+button {
+  border: none;
+  letter-spacing: 1.5;
+  background: none;
+  cursor: pointer;
+  font-size: 15px;
+  color: rgba(46, 46, 226, 0.839);
+  /* font-family: 'Playfair Display', serif; */
+}
+
+@media screen and (max-width: 750px){
+  body{
+    display: block;
+  }
+  h1{
+    text-align: center;
+  }
+}
