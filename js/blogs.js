@@ -55,7 +55,7 @@ async function displayBlogPosts() {
       const spandateh2 = document.createElement('span')
       spandateh2.classList.add('date')
       const aTitle = document.createElement('a')
-      aTitle.href = `blog.html?slug=${post.slug}`
+      aTitle.href = `blog?slug=${post.slug}`
       aTitle.textContent = post.title
       const pContent = document.createElement('p')
       pContent.classList.add('text')
@@ -76,7 +76,7 @@ async function displayBlogPosts() {
       const divPostedBy = document.createElement('div')
       divPostedBy.classList.add('post-by')
       const aDivPostedBy = document.createElement('a')
-      aDivPostedBy.href = '../index.html'
+      aDivPostedBy.href = 'home'
       aDivPostedBy.textContent = 'Travel with EPI'
       divPostedBy.textContent = 'Posted by '
       const divExtraInfo = document.createElement('div')
@@ -160,7 +160,7 @@ async function afficherPost(slug) {
     const divPostedBy = document.createElement('div')
     divPostedBy.classList.add('post-by')
     const aDivPostedBy = document.createElement('a')
-    aDivPostedBy.href = '../index.html'
+    aDivPostedBy.href = 'home'
     aDivPostedBy.textContent = 'Travel with EPI'
     divPostedBy.textContent = 'Posted by '
     divPostedBy.appendChild(aDivPostedBy)
@@ -183,7 +183,7 @@ async function afficherPost(slug) {
     const divComments = document.createElement('div')
     divComments.classList.add('comments')
     const h3 = document.createElement('h3')
-    h3.textContent = await countComments(post.id) + ' Commentaires'
+    h3.textContent = await countComments(post.id) + (await countComments(post.id) > 1 ? ' Comments' : ' Comment');
     divComments.appendChild(h3)
     const divComList = document.createElement('div')
     divComList.classList.add('comments-list')

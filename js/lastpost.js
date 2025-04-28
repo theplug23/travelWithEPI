@@ -36,9 +36,8 @@ async function displayLatestPosts() {
             const title = document.createElement('span');
             title.classList.add('date');
             const postLink = document.createElement('a');
-            const url = 'blog.html';
             const slug = post.slug;
-            postLink.href = `${url}?slug=${slug}`; 
+            postLink.href = `blog?slug=${slug}`; 
             postLink.textContent = truncateTitle(post.title) + '...';
             title.appendChild(postLink);
 

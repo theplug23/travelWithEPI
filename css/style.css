@@ -718,7 +718,7 @@ nav.sticky li:hover ul.submenu {
 */
 
 section.tada-container {
-	margin-top:50px;
+	margin-top: 100px;
 }
 article {
 	margin-bottom:50px;
@@ -773,7 +773,8 @@ article {
 }
 .post-text {
 	padding:50px;
-	border-radius:0 0 10px 10px
+	border-radius:0 0 10px 10px;
+	margin-top: 10%;
 }
 .blog-2-columns-sidebar .post-text {
 	padding:25px;	
@@ -1299,7 +1300,7 @@ ul.bullet {
 }
 .post .comments {
 	letter-spacing: 2px;
-    padding:100px 50px 0 50px;	
+    padding:50px 0;	
 }
 .comments h3 {
 	font-size:18px;
@@ -1374,7 +1375,12 @@ ul.bullet {
 	width:80%;	
 }
 .comment-form {
-	padding:80px 50px 50px 50px;
+	padding: 50px 50px 50px 0px;
+	letter-spacing: 2px;
+	border-radius:0 0 10px 10px;
+}
+#blog-content{
+	padding: 50px;
 	letter-spacing: 2px;
 	border-radius:0 0 10px 10px;
 }
@@ -1396,7 +1402,7 @@ form{
 .comment-form input {
 	border-radius:5px;
 	margin: 5px 0 10px 0;
-	width:40%;
+	width:100%;
 	height:40px;
 	padding:10px;	
 }
@@ -1767,6 +1773,9 @@ section> div .espace{
 	section .espace{
 		margin-top: -65px !important;
 	}
+	.post-text {
+		margin-top: 15%;
+	}
 }
 @media screen and (max-width: 1100px) {
 	
@@ -1858,6 +1867,10 @@ section> div .espace{
 	}
 	.post-text {
 		padding:25px;
+		margin-top: 15%;
+	}
+	#about-bloc{
+		margin-top: 50%;
 	}
 	.post-info {
 		padding:18px 25px;	
@@ -1977,6 +1990,12 @@ section> div .espace{
 		float:none;
 		width:100%;
 	}
+	.comment-form {
+		padding: 40px 0;
+	}
+	#blog-content{
+		padding: 30px;
+	}
 	.comment-form input {
 		width:100%;
 	}
@@ -2010,12 +2029,18 @@ section> div .espace{
 		text-align:center;
 		display:block;
 	}
+	#about-bloc{
+		margin-top: 60%;
+	}
 }
 @media screen and (max-width: 360px){
 	.more a{
 		display: block;
 		margin-left: 110px;
 		margin-right: 110px;
+	}
+	#about-bloc{
+		margin-top: 70%;
 	}
 }
 @media screen and (min-width: 401px) and (max-width: 550px) {
