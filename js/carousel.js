@@ -41,50 +41,30 @@ const imagesLink = [
 	"img-pmal-1.jpg"
 ]
 
-const divContainer = document.querySelector('.container-carousel');
-const divCarousel = document.querySelector('.carousel');
-
-imagesLink.forEach(url => {
-    const img = document.createElement('img');
-    img.src = `EPIDEAA_IMAGES/${url}`;
-    img.classList.add('carousel-item');
-    divCarousel.appendChild(img);
-});
-divContainer.appendChild(divCarousel);
-
-const imagesLoaded = document.querySelectorAll('.carousel-item');
-
-const interval = 3000;
-
-let currentIndex = 0;
-let timer = null;
-
-function slideTo(index) {
-    if (index < 0 || index >= imagesLoaded.length) {
-    return;
+const container = document.querySelector('.grid-container')
+// Fonction pour choisir aléatoirement trois images
+function chooseRandomImages(imagesArray, numImages) {
+    const randomImages = [];
+    
+    for (let i = 0; i < numImages; i++) {
+        const randomIndex = Math.floor(Math.random() * imagesArray.length);
+        randomImages.push(imagesArray[randomIndex]);
+        imagesArray.splice(randomIndex, 1);
     }
 
-    divCarousel.style.transform = `translateX(-${index * 25}%)`;
-    currentIndex = index;
+    return randomImages;
 }
 
-function slideNext() {
-    const nextIndex = currentIndex + 1 >= imagesLoaded.length ? 0 : currentIndex + 1;
-    slideTo(nextIndex);
-}
+// Choisir aléatoirement trois images
+const selectedImages = chooseRandomImages(imagesLink, 3);
 
-function startTimer() {
-    timer = setInterval(slideNext, interval);
-}
-
-function stopTimer() {
-    clearInterval(timer);
-    timer = null;
-}
-
-// Démarrer le défilement automatique
-startTimer();
-
-// Gérer les événements de survol pour arrêter/démarrer le défilement automatique
-divContainer.addEventListener('mouseover', stopTimer);
-divContainer.addEventListener('mouseout', startTimer);
+// Afficher les images sélectionnées
+selectedImages.forEach(imageUrl => {
+	const div = document.createElement('div')
+	div.classList.add('grid-item')
+    const imgElement = document.createElement('img');
+    imgElement.src = `EPIDEAA_IMAGES/${imageUrl}`;
+	imgElement.alt = imageUrl;
+    div.appendChild(imgElement)
+	container.appendChild(div)
+});

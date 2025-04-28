@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
-        .container-carousel {
+        /*.container-carousel {
             width: 100%;
             margin: 0 auto;
         }
@@ -45,6 +45,23 @@
             margin-right: 30px;
             scroll-snap-align: start;
             border-radius: 15px;
+        }*/
+
+        .grid-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 15px;
+          padding: 10px;
+        }
+        
+        .grid-item {
+          text-align: center;
+        }
+        
+        img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 15px;
         }
     </style>
     
@@ -241,18 +258,16 @@
                     </div>
                 </div>
                 
-                <div class="container-carousel">
+                <!-- <div class="container-carousel">
                     <div class="carousel"></div>
-                </div>
+                </div> -->
+                <div class="grid-container"></div>
 
                 <div class="clearfix"></div>
                 <div style="margin-top: 80px !important;" class="more">
                     <a href="gallery.html" class="see-more">See More</a>
                 </div>
             </section>
-            <div class="content container-carousel">
-                <div class="carousel"></div>
-            </div>
         </div>
         <div>
             <div class="content col-xs-8">
