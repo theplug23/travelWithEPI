@@ -380,10 +380,33 @@
             function getConsent() { const r = getRaw(COOKIE_NAME); if (!r) return null; try { return JSON.parse(r); } catch (e) { if (r === 'accepted') return { analytics: true, marketing: true, status: 'accepted' }; if (r === 'rejected') return { analytics: false, marketing: false, status: 'rejected' }; return null; } }
 
             function showBanner() { const b = document.getElementById('cookie-consent'); if (b) b.hidden = false; }
-            function hideBanner() { const b = document.getElementById('cookie-consent'); if (b) b.hidden = true; }
-            function openModal() { const m = document.getElementById('ccModalBackdrop'); if (!m) return; m.classList.add('cc-show'); m.setAttribute('aria-hidden', 'false'); const c = getConsent(); document.getElementById('cc_analytics').checked = c ? !!c.analytics : false; document.getElementById('cc_marketing').checked = c ? !!c.marketing : false; setTimeout(() => document.getElementById('cc_analytics').focus(), 100); }
-            function closeModal() { const m = document.getElementById('ccModalBackdrop'); if (!m) return; m.classList.remove('cc-show'); m.setAttribute('aria-hidden', 'true'); }
+            function hideBanner() {
+                const b = document.getElementById('cookie-consent');
+                if (b) {
+                    b.style.display = "none";
+                    b.setAttribute("hidden", "true");
+                }
+            }
 
+            function closeModal() {
+                const m = document.getElementById('ccModalBackdrop');
+                if (m) {
+                    m.classList.remove('cc-show');
+                    m.style.display = "none";
+                    m.setAttribute('aria-hidden', 'true');
+                }
+            }
+            function openModal() {
+                const m = document.getElementById('ccModalBackdrop');
+                if (!m) return;
+                m.style.display = "flex";
+                m.classList.add('cc-show');
+                m.setAttribute('aria-hidden', 'false');
+                const c = getConsent();
+                document.getElementById('cc_analytics').checked = c ? !!c.analytics : false;
+                document.getElementById('cc_marketing').checked = c ? !!c.marketing : false;
+                setTimeout(() => document.getElementById('cc_analytics').focus(), 100);
+            }
             function loadConsented(consent) {
                 // find all scripts tagged data-cookie and inject them only if consent allows
                 const tags = document.querySelectorAll('script[data-cookie]');
