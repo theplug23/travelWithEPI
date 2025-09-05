@@ -195,11 +195,7 @@
                 <li>
                     <div class="pattern"></div>
                     <!-- <iframe width="100%" height="550px" src="https://www.youtube.com/embed/rJUrmLdDjE0?rel=0&autoplay=1&loop=1&playlist=rJUrmLdDjE0&mute=1" frameborder="0" allow='autoplay; encrypted-media' allowfullscreen></iframe> -->
-                    <video autoplay loop muted playsinline
-                        webkit-playsinline
-                        width="100%"
-                        height="550px"
-                        poster="">
+                    <video autoplay loop muted playsinline webkit-playsinline width="100%" height="550px" poster="">
                         <source src="video/Epideaa_video.mp4" type="video/mp4">
                         <!-- pensez éventuellement à ajouter un WebM en secours : -->
                         <!-- <source src="video/Epideaa_video.webm" type="video/webm"> -->
@@ -407,11 +403,233 @@
     ****************************************************************** -->
     <script src="js/carousel.js"></script>
     <script src="js/newsltr.js"></script>
+
+    <!-- =========================
+  COOKIE CONSENT (EN) - paste BEFORE your <script src="js/jquery-1.12.4.min.js"></script>
+  ========================= -->
+    <style>
+        /* Banner */
+        #cookie-consent {
+            position: fixed;
+            left: 18px;
+            right: 18px;
+            bottom: 18px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            padding: 16px;
+            z-index: 99999;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            font-family: inherit;
+        }
+
+        #cookie-consent .cc-text {
+            flex: 1;
+            min-width: 220px;
+            color: #222;
+            line-height: 1.2;
+        }
+
+        #cookie-consent .cc-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .cc-btn {
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .cc-accept {
+            background: #0b637d;
+            color: #fff;
+        }
+
+        .cc-reject {
+            background: #f1f1f1;
+            color: #222;
+        }
+
+        .cc-settings {
+            background: transparent;
+            color: #0b637d;
+            border: 1px solid #0b637d;
+            padding: 7px 12px;
+        }
+
+        /* Modal */
+        .cc-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100000;
+        }
+
+        .cc-modal {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 720px;
+            width: 94%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            color: #222;
+        }
+
+        .cc-modal h2 {
+            margin-top: 0;
+        }
+
+        .cc-modal label {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .cc-modal input[type="checkbox"] {
+            -webkit-appearance: checkbox !important;
+            appearance: checkbox !important;
+            width: 20px;
+            height: 20px;
+            accent-color: #0b637d !important;
+        }
+
+        /* utility */
+        .cc-show {
+            display: flex !important;
+        }
+
+        @media(max-width:600px) {
+            #cookie-consent {
+                left: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+
+    <div id="cookie-consent" role="dialog" aria-live="polite" aria-label="Cookie notice" hidden>
+        <div class="cc-text">
+            <strong>We use cookies</strong>
+            <div style="margin-top:6px; font-size:14px;">
+                We use necessary cookies for site function and optional cookies (Analytics & Marketing).
+                Manage your choices in <button id="ccSettings" class="cc-settings"
+                    style="display:inline;padding:0;border:0;background:none;color:inherit;cursor:pointer;text-decoration:underline">Settings</button>.
+            </div>
+        </div>
+        <div class="cc-actions">
+            <button class="cc-btn cc-reject" id="ccReject">Reject</button>
+            <button class="cc-btn cc-accept" id="ccAccept">Accept</button>
+        </div>
+    </div>
+
+    <div id="ccModalBackdrop" class="cc-modal-backdrop" aria-hidden="true">
+        <div class="cc-modal" role="document" aria-labelledby="ccModalTitle">
+            <button id="ccModalClose" aria-label="Close"
+                style="float:right;border:0;background:none;font-size:20px;cursor:pointer">&times;</button>
+            <h2 id="ccModalTitle">Cookie settings</h2>
+            <p style="color:#555">Necessary cookies are required for site functionality. Choose optional cookies below:
+            </p>
+
+            <label><input type="checkbox" id="cc_analytics">
+                <div><strong>Analytics</strong>
+                    <div style="font-size:13px;color:#666">Collect usage data to improve the site (e.g. Google
+                        Analytics).</div>
+                </div>
+            </label>
+            <label><input type="checkbox" id="cc_marketing">
+                <div><strong>Marketing</strong>
+                    <div style="font-size:13px;color:#666">Used for advertising and social integrations (e.g. Facebook
+                        Pixel).</div>
+                </div>
+            </label>
+
+            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+                <button class="cc-btn cc-reject" id="ccModalReject">Reject all</button>
+                <button class="cc-btn cc-accept" id="ccModalOk">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const COOKIE_NAME = 'epideaa_cookie_v1';
+            const DAYS = 365;
+            function setCookie(n, v, d) { const t = new Date(); t.setTime(t.getTime() + d * 24 * 60 * 60 * 1000); document.cookie = n + '=' + encodeURIComponent(v) + ';path=/;SameSite=Lax;' + (location.protocol === 'https:' ? 'Secure;' : '') + 'expires=' + t.toUTCString(); }
+            function getRaw(n) { return document.cookie.split('; ').reduce((r, c) => { const p = c.split('='); return p[0] === n ? decodeURIComponent(p[1]) : r }, ''); }
+            function getConsent() { const r = getRaw(COOKIE_NAME); if (!r) return null; try { return JSON.parse(r); } catch (e) { if (r === 'accepted') return { analytics: true, marketing: true, status: 'accepted' }; if (r === 'rejected') return { analytics: false, marketing: false, status: 'rejected' }; return null; } }
+
+            function showBanner() { const b = document.getElementById('cookie-consent'); if (b) b.hidden = false; }
+            function hideBanner() { const b = document.getElementById('cookie-consent'); if (b) b.hidden = true; }
+            function openModal() { const m = document.getElementById('ccModalBackdrop'); if (!m) return; m.classList.add('cc-show'); m.setAttribute('aria-hidden', 'false'); const c = getConsent(); document.getElementById('cc_analytics').checked = c ? !!c.analytics : false; document.getElementById('cc_marketing').checked = c ? !!c.marketing : false; setTimeout(() => document.getElementById('cc_analytics').focus(), 100); }
+            function closeModal() { const m = document.getElementById('ccModalBackdrop'); if (!m) return; m.classList.remove('cc-show'); m.setAttribute('aria-hidden', 'true'); }
+
+            function loadConsented(consent) {
+                // find all scripts tagged data-cookie and inject them only if consent allows
+                const tags = document.querySelectorAll('script[data-cookie]');
+                tags.forEach(tag => {
+                    if (tag.getAttribute('data-cookie-loaded')) return;
+                    const cat = tag.getAttribute('data-cookie'); // analytics | marketing
+                    const src = tag.getAttribute('data-src') || tag.getAttribute('src');
+                    const inline = tag.textContent && tag.textContent.trim();
+                    if (cat === 'analytics' && consent.analytics) { if (src) { const s = document.createElement('script'); s.src = src; s.async = true; document.head.appendChild(s); } else if (inline) { try { new Function(inline)(); } catch (e) { console.warn(e); } } tag.setAttribute('data-cookie-loaded', '1'); }
+                    if (cat === 'marketing' && consent.marketing) { if (src) { const s2 = document.createElement('script'); s2.src = src; s2.async = true; document.head.appendChild(s2); } else if (inline) { try { new Function(inline)(); } catch (e) { console.warn(e); } } tag.setAttribute('data-cookie-loaded', '1'); }
+                });
+            }
+
+            // log (optional) via sendBeacon - not mandatory
+            function logServer(obj) {
+                if (!navigator.sendBeacon) return;
+                try { navigator.sendBeacon('/log-consent.php', JSON.stringify({ consent: obj, ts: Date.now(), url: location.pathname })); } catch (e) { }
+            }
+
+            const consent = getConsent();
+            if (consent && (consent.status === 'accepted' || consent.status === 'custom')) { loadConsented(consent); hideBanner(); } else { showBanner(); }
+
+            // event handlers
+            document.addEventListener('click', function (e) {
+                // delegate (safe if elements don't exist)
+                const t = e.target;
+                if (t && t.id === 'ccAccept') { const o = { analytics: true, marketing: true, status: 'accepted' }; setCookie(COOKIE_NAME, JSON.stringify(o), DAYS); loadConsented(o); hideBanner(); logServer(o); }
+                if (t && t.id === 'ccReject') { const o = { analytics: false, marketing: false, status: 'rejected' }; setCookie(COOKIE_NAME, JSON.stringify(o), DAYS); hideBanner(); logServer(o); }
+                if (t && (t.id === 'ccSettings' || t.id === 'ccSettingsInline')) { e.preventDefault(); openModal(); }
+                if (t && t.id === 'ccModalClose') { closeModal(); }
+                if (t && t.id === 'ccModalReject') { const o = { analytics: false, marketing: false, status: 'rejected' }; setCookie(COOKIE_NAME, JSON.stringify(o), DAYS); closeModal(); hideBanner(); logServer(o); }
+                if (t && t.id === 'ccModalOk') { const analytics = !!document.getElementById('cc_analytics').checked; const marketing = !!document.getElementById('cc_marketing').checked; const o = { analytics: analytics, marketing: marketing, status: 'custom' }; setCookie(COOKIE_NAME, JSON.stringify(o), DAYS); loadConsented(o); closeModal(); hideBanner(); logServer(o); }
+            });
+
+            // close modal on backdrop click
+            const modalBackdrop = document.getElementById('ccModalBackdrop');
+            if (modalBackdrop) { modalBackdrop.addEventListener('click', function (ev) { if (ev.target === modalBackdrop) closeModal(); }); }
+
+            // accessibility: ESC to close modal
+            document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') { if (document.getElementById('ccModalBackdrop') && document.getElementById('ccModalBackdrop').classList.contains('cc-show')) closeModal(); } });
+
+            // small defensive timeout in case DOM not ready
+            setTimeout(() => { if (!document.getElementById('cookie-consent')) console.warn('Cookie consent element not found on this page'); }, 2000);
+
+        })();
+    </script>
+    <!-- =========================
+  END COOKIE CONSENT
+  ========================= -->
+
+
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="js/slippry.js"></script>
     <script src="js/main.js"></script>
     <script src="js/lastpost.js"></script>
-    <script src="js/postfacebook.js"></script>
+    <script data-cookie="marketing" src="js/postfacebook.js"></script>
 </body>
 
 </html>
